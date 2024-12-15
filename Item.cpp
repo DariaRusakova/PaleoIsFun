@@ -15,10 +15,14 @@ void Items::print(ItemName type)
 }
 void Items::print()
 {
-    cout << "\t +Items" << endl;
     for (const auto& item : items)
-        cout << getName(item.first) << "\t" << item.second << endl;
-    cout << "\t -Items" << endl;
+    {
+        if (item.first >= ItemNums::Findings) {
+            continue;
+        }
+        cout << getName(item.first) << ": " << item.second << " | ";
+    }
+    cout << endl;
 }
 
 void Items::sellList()
@@ -28,30 +32,41 @@ void Items::sellList()
         if (item.first < ItemNums::Findings) {
             continue;
         }
+        if (item.second == 0) continue;
         cout << item.first << ": " << getName(item.first) << "\t - count: " << item.second << endl;
     }
 }
 
 void Items::buyList()
 {
-    for (const auto& item : items)
+    cout << 1 << ": " << getName(static_cast<ItemName>(1)) << endl;
+    for (int i{ ItemNums::Instruments }; i <= ItemName::Shovel; i++)
     {
-        if (item.first == ItemName::Gold or item.first >= ItemNums::Findings) {
-            continue;
-        }
-        cout << item.first << ": " << getName(item.first) << "\t - count: " << item.second << endl;
+
+        cout << i << ": " << getName(static_cast<ItemName>(i)) << endl;
     }
 }
 
-void Items::printInstruments()
+unsigned Items::printInstruments()
 {
+    unsigned count = 0;
     for (const auto& item : items)
     {
         if (item.first < ItemNums::Instruments or item.first >= ItemNums::Findings) {
             continue;
         }
+        if (item.second == 0) continue;
+
+        count++;
         cout << item.first << ": " << getName(item.first) << "\t - count: " << item.second << endl;
     }
+    return count;
+}
+
+
+void Items::set(ItemName type, unsigned value)
+{
+    items[type] = value;
 }
 
 void Items::add(ItemName type, unsigned value)

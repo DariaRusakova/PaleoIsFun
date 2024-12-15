@@ -25,6 +25,7 @@ Shop::Shop() {
 void Shop::sell(Items& items, ItemName name, unsigned value)
 {
      unsigned price = priceList[name];
+     if (price == 0) return;
      if (items.canSpend(name, value))
      {
        items.spend(name, value);
@@ -43,6 +44,7 @@ void Shop::sellAll(Items& items, ItemName name)
 void Shop::buy(Items& items, ItemName name, unsigned value)
 {
     unsigned price = priceList[name];
+    if (price == 0) return;
     unsigned cost = price * value;
     if (items.canSpend(ItemName::Gold, cost))
     {

@@ -11,7 +11,7 @@ class CityExcavation :
 {
 private:
 	string name = "Excavation in the Abandoned City";
-	int cost = 100;
+	int cost = 60;
 	vector<ItemName> findings = { 
 		ItemName::PorkSoda, 
 		ItemName::Skull,
@@ -28,6 +28,7 @@ private:
 public:
 	CityExcavation(Items&);
 	void excavate(Items&, ItemName);
+	void effect();
 	void printText() {
 		cout << "Welcome to the remainig ruins of society " << endl;
 	};

@@ -19,6 +19,7 @@ private:
 public:
 	virtual void excavate(Items&, ItemName) = 0;
 	virtual void printText() = 0;
+	virtual void effect() = 0;
 
 	int getRandomInt(int min, int max) {
 		random_device rd;

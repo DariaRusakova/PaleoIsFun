@@ -9,10 +9,17 @@ MoonExcavation::MoonExcavation(Items& items) {
 	items.spend(ItemName::Gold, cost);
 }
 
+void MoonExcavation::effect() {
+	cout << "Clank!!!" << endl;
+}
+
 void MoonExcavation::excavate(Items& items, ItemName instrument) {
 
-	cout << "Do some excavation" << endl;
-
+	effect();
+	if (items.get()[instrument] == 0) {
+		cout << "Bad instrument!" << endl;
+		return;
+	}
 	bool isInstumentBroken = false;
 	if (instrument == ItemName::Brush) {
 		isInstumentBroken = true;
@@ -28,6 +35,7 @@ void MoonExcavation::excavate(Items& items, ItemName instrument) {
 	{
 		ItemName thing = findings[getRandomInt(0, findings.size() - 1)];
 		items.add(thing, 1);
+		cout << "You have found " << items.getName(thing) << "! Lucky you..." << endl;
 	}
 	else {
 		cout << "Your instrument has flown away. No findings today." << endl;

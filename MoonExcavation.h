@@ -28,6 +28,7 @@ private:
 public:
 	MoonExcavation(Items&);
 	void excavate(Items&, ItemName);
+	void effect();
 	void printText() {
 		cout << "Welcome to the secluded land of eternity " << endl;
 	};

@@ -11,7 +11,7 @@ class DesertExcavation :
 {
 private:
 	string name = "Excavation In The Goby Dessert";
-	int cost = 100;
+	int cost = 80;
 	vector<ItemName> findings = {
 		ItemName::Ammonit, 
 		ItemName::Skull,
@@ -28,6 +28,7 @@ private:
 public:
 	DesertExcavation(Items&);
 	void excavate(Items&, ItemName);
+	void effect();
 	void printText() {
 		cout << "Welcome to deadly hot motherland of lizards!" << endl;
 	};

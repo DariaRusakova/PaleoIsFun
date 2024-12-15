@@ -57,8 +57,9 @@ namespace ItemsStore
         void print();
         void sellList();
         void buyList();
-        void printInstruments();
+        unsigned printInstruments();
         void add(ItemName, unsigned);
+        void set(ItemName, unsigned);
         void spend(ItemName, unsigned);
         bool canSpend(ItemName, unsigned);
         ItemsType get();

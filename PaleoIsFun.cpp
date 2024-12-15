@@ -44,7 +44,7 @@ void loadGame(Items& items)
         int itemName, count;
         while (in >> itemName >> count)
         {
-            items.add(static_cast<ItemName>(itemName), count);
+            items.set(static_cast<ItemName>(itemName), count);
         }
     }
     in.close();
@@ -66,6 +66,7 @@ int main()
         if (location == "0")
         {
             system("cls");
+            items.print();
             cout << "Welcome to the Base!" << endl;
             cout << "Choose your action" << endl;
             cout << "1. Shop" << endl;
@@ -81,10 +82,11 @@ int main()
 
         if (location == "1")
         {
-            system("cls");
             string shopAction = "0";
             while (true)
             {
+                system("cls");
+                items.print();
                 cout << "Welcome to the Shop!" << endl;
                 cout << "Choose your action" << endl;
                 cout << "1. Sell Items" << endl;
@@ -98,6 +100,7 @@ int main()
                     while (true)
                     {
                         system("cls");
+                        items.print();
                         cout << "Welcome to the Shop!" << endl;
                         string itemId;
                         cout << "Sell Items: " << endl;
@@ -106,7 +109,7 @@ int main()
                         cout << ">> ";
 
                         cin.ignore();
-                        getline(cin, itemId);
+                        cin >> itemId;
 
                         if (itemId != "0")
                         {
@@ -126,15 +129,16 @@ int main()
                     while (true)
                     {
                         system("cls");
+                        items.print();
                         cout << "Welcome to the Shop!" << endl;
-                        string itemId;
+                        string itemId = "0";
                         cout << "Buy Items: " << endl;
                         items.buyList();
                         cout << "0. Exit" << endl;
                         cout << ">> ";
 
                         cin.ignore();
-                        getline(cin, itemId);
+                        cin >> itemId;
 
                         if (itemId != "0")
                         {
@@ -152,68 +156,9 @@ int main()
 
                 if (shopAction == "3")
                 {
-                    string expId = "0";
-                    cout << "Choose your expedition!" << endl;
-                    cout << "1. Desert expedition" << endl;
-                    cout << "2. Swamp expedition" << endl;
-                    cout << "3. City expedition" << endl;
-                    cout << "4. Moon expedition" << endl;
-                    cout << ">> ";
-
-                    cin >> expId;
-
-                    Excavation* expedition;
-
-                    if (expId == "1")
-                    {
-                        expedition = new DesertExcavation(items);
-                    }
-                    if (expId == "2")
-                    {
-                        expedition = new SwampExcavation(items);
-                    }
-                    if (expId == "3")
-                    {
-                        expedition = new CityExcavation(items);
-                    }
-                    if (expId == "2")
-                    {
-                        expedition = new MoonExcavation(items);
-                    }
-
-                    while (true)
-                    {
-                        system("cls");
-                        string choice = "0";
-                        cout << "Start digging?" << endl;
-                        cout << "1. Dig" << endl;
-                        cout << "2. Go to base" << endl;
-                        cout << ">> ";
-                        cin >> choice;
-
-                        if (choice == "1")
-                        {
-                            cout << "Choose your instrument!" << endl;
-                            string instrument;
-                            items.printInstruments();
-                            cout << ">> ";
-                            cin.ignore();
-                            getline(cin, instrument);
-                            ItemName itemName = static_cast<ItemName>(stoi(instrument));
-                            expedition->excavate(items, itemName);
-                            choice = "0";
-                        }
-
-                        if (choice == "2")
-                        {
-                            cout << "Go to base!" << endl;
-                            getchar();
-                            location = "0";
-                            museum.putOnShelf(items);
-                            saveGame(items);
-                            break;
-                        }
-                    }
+                    cout << "See you later!!" << endl;
+                    location = "0";
+                    break;
                 }
             }
 
@@ -225,24 +170,108 @@ int main()
             cout << "Welcome to " << museum.getName() << endl;
             museum.show();
 
-            getchar();
+            system("pause");
             location = "0";
         }
 
         if (location == "3")
         {
-            system("cls");
-            cout << "Welcome to Expedition" << endl;
+            string expId = "0";
+            cout << "Choose your expedition!" << endl;
+            cout << "1. Desert expedition" << endl;
+            cout << "2. Swamp expedition" << endl;
+            cout << "3. City expedition" << endl;
+            cout << "4. Moon expedition" << endl;
+            cout << ">> ";
 
-            getchar();
-            location = "0";
+            cin >> expId;
+
+            Excavation* expedition = nullptr;
+
+            if (expId == "1")
+            {
+                expedition = new DesertExcavation(items);
+            }
+            if (expId == "2")
+            {
+                expedition = new SwampExcavation(items);
+            }
+            if (expId == "3")
+            {
+                expedition = new CityExcavation(items);
+            }
+            if (expId == "4")
+            {
+                expedition = new MoonExcavation(items);
+            }
+
+            if (expedition == nullptr) {
+                expedition = new DesertExcavation(items);
+            }
+            
+            system("pause");
+
+            while (true)
+            {
+                system("cls");
+                items.print();
+
+                if (!items.canSpend(ItemName::Food, 1)) {
+                    cout << "Out of Food!" << endl;
+                    cout << "Go to base!" << endl;
+                    system("pause");
+                    location = "0";
+                    museum.putOnShelf(items);
+                    saveGame(items);
+                    break;
+                }
+
+                string choice = "0";
+                cout << "Start digging?" << endl;
+                cout << "1. Dig" << endl;
+                cout << "2. Go to base" << endl;
+                cout << ">> ";
+                cin >> choice;
+
+                if (choice == "1")
+                {
+                    cout << "Choose your instrument!" << endl;
+                    string instrument;
+                    if (items.printInstruments() <= 0) {
+                        cout << "Out of Instruments!" << endl;
+                        cout << "Go to base!" << endl;
+                        system("pause");
+                        location = "0";
+                        museum.putOnShelf(items);
+                        saveGame(items);
+                        break;
+                    }
+                    cout << ">> ";
+                    cin.ignore();
+                    cin >> instrument;
+                    ItemName itemName = static_cast<ItemName>(stoi(instrument));
+                    expedition->excavate(items, itemName);
+                    system("pause");
+                    choice = "0";
+                }
+
+                if (choice == "2")
+                {
+                    cout << "Go to base!" << endl;
+                    system("pause");
+                    location = "0";
+                    museum.putOnShelf(items);
+                    saveGame(items);
+                    break;
+                }
+            }
         }
 
         if (location == "4")
         {
             loadGame(items);
             cout << "Game loaded!!" << endl;
-            getchar();
+            system("pause");
             location = "0";
         }
 

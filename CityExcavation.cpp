@@ -9,10 +9,17 @@ CityExcavation::CityExcavation(Items& items) {
 	items.spend(ItemName::Gold, cost);
 }
 
+void CityExcavation::effect() {
+	cout << "Dang!!!" << endl;
+}
+
 void CityExcavation::excavate(Items& items, ItemName instrument) {
 
-	cout << "Do some excavation" << endl;
-
+	effect();
+	if (items.get()[instrument] == 0) {
+		cout << "Bad instrument!" << endl;
+		return;
+	}
 	bool isInstumentBroken = false;
 	if (instrument == ItemName::Pickaxe) {
 		isInstumentBroken = true;
@@ -28,6 +35,7 @@ void CityExcavation::excavate(Items& items, ItemName instrument) {
 	{
 		ItemName thing = findings[getRandomInt(0, findings.size() - 1)];
 		items.add(thing, 1);
+		cout << "You have found " << items.getName(thing) << "! Lucky you..." << endl;
 	}
 	else {
 		cout << "Your instrument has got stuck in ruins. No findings today." << endl;

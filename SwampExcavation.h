@@ -11,7 +11,7 @@ class SwampExcavation :
 {
 private:
 	string name = "Excavation in the misty swamp";
-	int cost = 100;
+	int cost = 70;
 	vector<ItemName> findings = { 
 		ItemName::Ammonit, 
 		ItemName::Skull,
@@ -28,6 +28,7 @@ private:
 public:
 	SwampExcavation(Items&);
 	void excavate(Items&, ItemName);
+	void effect();
 	void printText() {
 		cout << "Welcome to the sinister land of fog " << endl;
 	};

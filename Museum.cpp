@@ -14,6 +14,7 @@ Museum::Museum(string name) {
 void Museum::putOnShelf(Items& items) {    
     for (const auto& item : items.get())
     {
+        if (item.first < ItemNums::Findings) continue;
         string val = items.getName(item.first);
 
         if (find(valuables.begin(), valuables.end(), val) == valuables.end())
