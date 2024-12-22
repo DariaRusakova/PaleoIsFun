@@ -2,7 +2,7 @@
 #include <iostream>
 
 using namespace ItemsStore;
-using namespace std;
+
 
 MoonExcavation::MoonExcavation(Items& items) {
 	printText();
@@ -10,14 +10,14 @@ MoonExcavation::MoonExcavation(Items& items) {
 }
 
 void MoonExcavation::effect() {
-	cout << "Clank!!!" << endl;
+	std::cout << "Clank!!!" << std::endl;
 }
 
 void MoonExcavation::excavate(Items& items, ItemName instrument) {
 
 	effect();
 	if (items.get()[instrument] == 0) {
-		cout << "Bad instrument!" << endl;
+		std::cout << "Bad instrument!" << std::endl;
 		return;
 	}
 	bool isInstumentBroken = false;
@@ -35,10 +35,10 @@ void MoonExcavation::excavate(Items& items, ItemName instrument) {
 	{
 		ItemName thing = findings[getRandomInt(0, findings.size() - 1)];
 		items.add(thing, 1);
-		cout << "You have found " << items.getName(thing) << "! Lucky you..." << endl;
+		std::cout << "You have found " << items.getName(thing) << "! Lucky you..." << std::endl;
 	}
 	else {
-		cout << "Your instrument has flown away. No findings today." << endl;
+		std::cout << "Your instrument has flown away. No findings today." << std::endl;
 		items.spend(instrument, 1);
 	}
 

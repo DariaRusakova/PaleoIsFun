@@ -6,7 +6,7 @@
 #include <string> 
 #include <iostream> 
 
-using namespace std;
+
 
 namespace ItemsStore
 {
@@ -45,7 +45,7 @@ namespace ItemsStore
 
     };
 
-    using ItemsType = map<ItemName, unsigned>;
+    using ItemsType = std::map<ItemName, unsigned>;
 
 
 
@@ -63,7 +63,7 @@ namespace ItemsStore
         void spend(ItemName, unsigned);
         bool canSpend(ItemName, unsigned);
         ItemsType get();
-        string getName(ItemName);
+        std::string getName(ItemName);
     private:
         ItemsType items;
     };

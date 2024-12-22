@@ -5,9 +5,9 @@
 
 using namespace ItemsStore;
 using namespace PaleoMuseum;
-using namespace std;
 
-Museum::Museum(string name) {
+
+Museum::Museum(std::string name) {
     this->name = name;
 }
 
@@ -15,7 +15,7 @@ void Museum::putOnShelf(Items& items) {
     for (const auto& item : items.get())
     {
         if (item.first < ItemNums::Findings) continue;
-        string val = items.getName(item.first);
+        std::string val = items.getName(item.first);
 
         if (find(valuables.begin(), valuables.end(), val) == valuables.end())
         {
@@ -24,7 +24,7 @@ void Museum::putOnShelf(Items& items) {
     }
 }
 
-string Museum::getName() {
+std::string Museum::getName() {
     return name;
 }
 
@@ -32,10 +32,10 @@ void Museum::show()
 {
     for (const auto& item : valuables)
     {
-        cout << item << endl;
+        std::cout << item << std::endl;
     }
 
     if (valuables.size() == 0) {
-        cout << "Museum is currently empty!" << endl;
+        std::cout << "Museum is currently empty!" << std::endl;
     }
 }

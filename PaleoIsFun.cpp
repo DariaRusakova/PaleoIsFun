@@ -15,29 +15,29 @@ using namespace ItemsStore;
 using namespace PaleoMuseum;
 using namespace PaleoShop;
 
-using namespace std;
 
 
-ostream& operator<<(ostream& o, Items& items) {
+
+std::ostream& operator<<(std::ostream& o, Items& items) {
     for (const auto& item : items.get())
-        o << item.first << "\t" << item.second << endl;
+        o << item.first << "\t" << item.second << std::endl;
     return o;
 }
 
 void saveGame(Items& items)
 {
-    ofstream out;
+    std::ofstream out;
     out.open("save.txt");
     if (out.is_open())
     {
-        out << items << endl;
+        out << items << std::endl;
     }
     out.close();
 }
 
 void loadGame(Items& items)
 {
-    ifstream in;
+    std::ifstream in;
     in.open("save.txt");
     if (in.is_open())
     {
@@ -59,7 +59,7 @@ int main()
     Shop shop;
 
     // 0 - Base, 1 - Shop, 2 - Museum, 3 - Excavation
-    string location = "0";
+    std::string location = "0";
 
     while (true)
     {
@@ -67,49 +67,49 @@ int main()
         {
             system("cls");
             items.print();
-            cout << "Welcome to the Base!" << endl;
-            cout << "Choose your action" << endl;
-            cout << "1. Shop" << endl;
-            cout << "2. Museum" << endl;
-            cout << "3. Expedition" << endl;
-            cout << "4. Load Game" << endl;
-            cout << "5. Exit" << endl;
-            cout << ">> ";
+            std::cout << "Welcome to the Base!" << std::endl;
+            std::cout << "Choose your action" << std::endl;
+            std::cout << "1. Shop" << std::endl;
+            std::cout << "2. Museum" << std::endl;
+            std::cout << "3. Expedition" << std::endl;
+            std::cout << "4. Load Game" << std::endl;
+            std::cout << "5. Exit" << std::endl;
+            std::cout << ">> ";
             location = "";
 
-            cin >> location;
+            std::cin >> location;
         }
 
         if (location == "1")
         {
-            string shopAction = "0";
+            std::string shopAction = "0";
             while (true)
             {
                 system("cls");
                 items.print();
-                cout << "Welcome to the Shop!" << endl;
-                cout << "Choose your action" << endl;
-                cout << "1. Sell Items" << endl;
-                cout << "2. Buy Items" << endl;
-                cout << "3. Exit" << endl;
-                cout << ">> ";
+                std::cout << "Welcome to the Shop!" << std::endl;
+                std::cout << "Choose your action" << std::endl;
+                std::cout << "1. Sell Items" << std::endl;
+                std::cout << "2. Buy Items" << std::endl;
+                std::cout << "3. Exit" << std::endl;
+                std::cout << ">> ";
 
-                cin >> shopAction;
+                std::cin >> shopAction;
 
                 if (shopAction == "1") {
                     while (true)
                     {
                         system("cls");
                         items.print();
-                        cout << "Welcome to the Shop!" << endl;
-                        string itemId;
-                        cout << "Sell Items: " << endl;
+                        std::cout << "Welcome to the Shop!" << std::endl;
+                        std::string itemId;
+                        std::cout << "Sell Items: " << std::endl;
                         items.sellList();
-                        cout << "0. Exit" << endl;
-                        cout << ">> ";
+                        std::cout << "0. Exit" << std::endl;
+                        std::cout << ">> ";
 
-                        cin.ignore();
-                        cin >> itemId;
+                        std::cin.ignore();
+                        std::cin >> itemId;
 
                         if (itemId != "0")
                         {
@@ -130,15 +130,15 @@ int main()
                     {
                         system("cls");
                         items.print();
-                        cout << "Welcome to the Shop!" << endl;
-                        string itemId = "0";
-                        cout << "Buy Items: " << endl;
+                        std::cout << "Welcome to the Shop!" << std::endl;
+                        std::string itemId = "0";
+                        std::cout << "Buy Items: " << std::endl;
                         items.buyList();
-                        cout << "0. Exit" << endl;
-                        cout << ">> ";
+                        std::cout << "0. Exit" << std::endl;
+                        std::cout << ">> ";
 
-                        cin.ignore();
-                        cin >> itemId;
+                        std::cin.ignore();
+                        std::cin >> itemId;
 
                         if (itemId != "0")
                         {
@@ -156,7 +156,7 @@ int main()
 
                 if (shopAction == "3")
                 {
-                    cout << "See you later!!" << endl;
+                    std::cout << "See you later!!" << std::endl;
                     location = "0";
                     break;
                 }
@@ -167,7 +167,7 @@ int main()
         if (location == "2")
         {
             system("cls");
-            cout << "Welcome to " << museum.getName() << endl;
+            std::cout << "Welcome to " << museum.getName() << std::endl;
             museum.show();
 
             system("pause");
@@ -176,15 +176,15 @@ int main()
 
         if (location == "3")
         {
-            string expId = "0";
-            cout << "Choose your expedition!" << endl;
-            cout << "1. Desert expedition" << endl;
-            cout << "2. Swamp expedition" << endl;
-            cout << "3. City expedition" << endl;
-            cout << "4. Moon expedition" << endl;
-            cout << ">> ";
+            std::string expId = "0";
+            std::cout << "Choose your expedition!" << std::endl;
+            std::cout << "1. Desert expedition" << std::endl;
+            std::cout << "2. Swamp expedition" << std::endl;
+            std::cout << "3. City expedition" << std::endl;
+            std::cout << "4. Moon expedition" << std::endl;
+            std::cout << ">> ";
 
-            cin >> expId;
+            std::cin >> expId;
 
             Excavation* expedition = nullptr;
 
@@ -217,8 +217,8 @@ int main()
                 items.print();
 
                 if (!items.canSpend(ItemName::Food, 1)) {
-                    cout << "Out of Food!" << endl;
-                    cout << "Go to base!" << endl;
+                    std::cout << "Out of Food!" << std::endl;
+                    std::cout << "Go to base!" << std::endl;
                     system("pause");
                     location = "0";
                     museum.putOnShelf(items);
@@ -226,29 +226,29 @@ int main()
                     break;
                 }
 
-                string choice = "0";
-                cout << "Start digging?" << endl;
-                cout << "1. Dig" << endl;
-                cout << "2. Go to base" << endl;
-                cout << ">> ";
-                cin >> choice;
+                std::string choice = "0";
+                std::cout << "Start digging?" << std::endl;
+                std::cout << "1. Dig" << std::endl;
+                std::cout << "2. Go to base" << std::endl;
+                std::cout << ">> ";
+                std::cin >> choice;
 
                 if (choice == "1")
                 {
-                    cout << "Choose your instrument!" << endl;
-                    string instrument;
+                    std::cout << "Choose your instrument!" << std::endl;
+                    std::string instrument;
                     if (items.printInstruments() <= 0) {
-                        cout << "Out of Instruments!" << endl;
-                        cout << "Go to base!" << endl;
+                        std::cout << "Out of Instruments!" << std::endl;
+                        std::cout << "Go to base!" << std::endl;
                         system("pause");
                         location = "0";
                         museum.putOnShelf(items);
                         saveGame(items);
                         break;
                     }
-                    cout << ">> ";
-                    cin.ignore();
-                    cin >> instrument;
+                    std::cout << ">> ";
+                    std::cin.ignore();
+                    std::cin >> instrument;
                     ItemName itemName = static_cast<ItemName>(stoi(instrument));
                     expedition->excavate(items, itemName);
                     system("pause");
@@ -257,7 +257,7 @@ int main()
 
                 if (choice == "2")
                 {
-                    cout << "Go to base!" << endl;
+                    std::cout << "Go to base!" << std::endl;
                     system("pause");
                     location = "0";
                     museum.putOnShelf(items);
@@ -270,14 +270,14 @@ int main()
         if (location == "4")
         {
             loadGame(items);
-            cout << "Game loaded!!" << endl;
+            std::cout << "Game loaded!!" << std::endl;
             system("pause");
             location = "0";
         }
 
         if (location == "5")
         {
-            cout << "See you later!!" << endl;
+            std::cout << "See you later!!" << std::endl;
             break;
         }
     }

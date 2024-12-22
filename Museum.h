@@ -4,7 +4,7 @@
 #include <vector>
 #include "item.h" 
 
-using namespace std;
+
 using namespace ItemsStore;
 
 namespace PaleoMuseum
@@ -12,13 +12,13 @@ namespace PaleoMuseum
     class Museum
     {
     public:
-        Museum(string);
+        Museum(std::string);
         void putOnShelf(Items&);
         void show();
-        string getName();
+        std::string getName();
 
     private:
-        vector<string> valuables;
-        string name;
+        std::vector<std::string> valuables;
+        std::string name;
     };
 }

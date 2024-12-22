@@ -3,7 +3,7 @@
 #include <string> 
 
 using namespace ItemsStore;
-using namespace std;
+
 
 Items::Items(unsigned gold) {
     items[ItemName::Gold] = gold;
@@ -11,7 +11,7 @@ Items::Items(unsigned gold) {
 
 void Items::print(ItemName type)
 {
-    cout << items[type];
+    std::cout << items[type];
 }
 void Items::print()
 {
@@ -20,9 +20,9 @@ void Items::print()
         if (item.first >= ItemNums::Findings) {
             continue;
         }
-        cout << getName(item.first) << ": " << item.second << " | ";
+        std::cout << getName(item.first) << ": " << item.second << " | ";
     }
-    cout << endl;
+    std::cout << std::endl;
 }
 
 void Items::sellList()
@@ -33,17 +33,17 @@ void Items::sellList()
             continue;
         }
         if (item.second == 0) continue;
-        cout << item.first << ": " << getName(item.first) << "\t - count: " << item.second << endl;
+        std::cout << item.first << ": " << getName(item.first) << "\t - count: " << item.second << std::endl;
     }
 }
 
 void Items::buyList()
 {
-    cout << 1 << ": " << getName(static_cast<ItemName>(1)) << endl;
+    std::cout << 1 << ": " << getName(static_cast<ItemName>(1)) << std::endl;
     for (int i{ ItemNums::Instruments }; i <= ItemName::Shovel; i++)
     {
 
-        cout << i << ": " << getName(static_cast<ItemName>(i)) << endl;
+        std::cout << i << ": " << getName(static_cast<ItemName>(i)) << std::endl;
     }
 }
 
@@ -58,7 +58,7 @@ unsigned Items::printInstruments()
         if (item.second == 0) continue;
 
         count++;
-        cout << item.first << ": " << getName(item.first) << "\t - count: " << item.second << endl;
+        std::cout << item.first << ": " << getName(item.first) << "\t - count: " << item.second << std::endl;
     }
     return count;
 }
@@ -92,7 +92,7 @@ ItemsType Items::get()
     return items;
 }
 
-string Items::getName(ItemName name)
+std::string Items::getName(ItemName name)
 {
     switch (name)
     {

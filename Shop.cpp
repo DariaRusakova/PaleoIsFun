@@ -6,10 +6,10 @@
 
 using namespace ItemsStore;
 using namespace PaleoShop;
-using namespace std;
+
 
 Shop::Shop() {
-    ifstream in;
+    std::ifstream in;
     in.open("priceList.txt");
     if (in.is_open())
     {
@@ -31,7 +31,7 @@ void Shop::sell(Items& items, ItemName name, unsigned value)
        items.spend(name, value);
        items.add(ItemsStore::ItemName::Gold, price * value);
      } else {
-         cout << "Not enough " << name << endl;
+         std::cout << "Not enough " << name << std::endl;
      }
 }
 
@@ -52,7 +52,7 @@ void Shop::buy(Items& items, ItemName name, unsigned value)
         items.spend(ItemsStore::ItemName::Gold, cost);
     }
     else {
-        cout << "No that much " << name << endl;
+        std::cout << "No that much " << name << std::endl;
     }
 }
 #include "Shop.h"

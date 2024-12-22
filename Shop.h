@@ -7,7 +7,7 @@
 
 #include "item.h" 
 
-using namespace std;
+
 using namespace ItemsStore;
 
 namespace PaleoShop
@@ -20,7 +20,7 @@ namespace PaleoShop
         void sellAll(Items&, ItemName);
         void buy(Items&, ItemName, unsigned);
     private:
-        map<ItemName, unsigned> priceList;
+        std::map<ItemName, unsigned> priceList;
     };
 }
 

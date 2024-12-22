@@ -3,16 +3,16 @@
 
 #include "item.h" 
 
-using namespace std;
+
 using namespace ItemsStore;
 
 class MoonExcavation :
 	public Excavation
 {
 private:
-	string name = "Excavation on the Lonely Moon";
+	std::string name = "Excavation on the Lonely Moon";
 	int cost = 100;
-	vector<ItemName> findings = { 
+	std::vector<ItemName> findings = { 
 		ItemName::Meteorite, 
 		ItemName::Skull,
 		ItemName::Ceramics,
@@ -30,7 +30,7 @@ public:
 	void excavate(Items&, ItemName);
 	void effect();
 	void printText() {
-		cout << "Welcome to the secluded land of eternity " << endl;
+		std::cout << "Welcome to the secluded land of eternity " << std::endl;
 	};
 };
 
